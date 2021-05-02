@@ -1,3 +1,21 @@
 [submodule "ShipsToSponge"]
 	path = ShipsToSponge
 	url = https://github.com/Minecraft-Ships/ShipsToSponge.git
+[submodule "ShipsToBukkit"]
+	path = ShipsToBukkit
+	url = https://github.com/Minecraft-Ships/ShipsToBukkit.git
+[submodule "ShipsForCore"]
+	path = ShipsForCore
+	url = https://github.com/Minecraft-Ships/ShipsForCore.git
+[submodule "ShipsCore"]
+	path = ShipsCore
+	url = https://github.com/Minecraft-Ships/ShipsCore.git
+[submodule "CoreToSponge"]
+	path = CoreToSponge
+	url = https://github.com/Minecraft-Ships/CoreToSponge.git
+[submodule "CoreToPaper"]
+	path = CoreToPaper
+	url = https://github.com/Minecraft-Ships/CoreToPaper.git
+[submodule "CoreToBukkit"]
+	path = CoreToBukkit
+	url = https://github.com/Minecraft-Ships/CoreToBukkit.git
