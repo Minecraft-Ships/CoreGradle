@@ -1,0 +1,3 @@
+[submodule "ShipsToSponge"]
+	path = ShipsToSponge
+	url = https://github.com/Minecraft-Ships/ShipsToSponge.git

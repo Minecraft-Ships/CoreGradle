@@ -1,0 +1,8 @@
+rootProject.name = 'Ships'
+include 'ShipsForCore'
+include 'ShipsCore'
+include 'CoreToBukkit'
+include 'CoreToPaper'
+include 'CoreToSponge'
+include 'ShipsToBukkit'
+include 'ShipsToSponge'
