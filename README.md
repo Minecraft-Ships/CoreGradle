@@ -21,15 +21,9 @@ This will clone all ships modules required for building of Ships.
 
 Open a CLI (Terminal, CMD, etc.) to this project and then run the following command
 
-``gradlew jar``
+``gradlew buildPlugin``
 
 This will create the ships plugin for both Bukkit and Sponge.
-You will find the jar file inside the following folders
+You will find the jar files inside the following folder.
 
-### Bukkit
-
-``/ShipsToBukkit/build/libs/ShipsToBukkit...jar``
-
-### Sponge
-
-``/ShipsToSponge/build/libs/ShipsToSponge...jar``
+``build/``
