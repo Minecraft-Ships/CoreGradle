@@ -17,8 +17,10 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-      - name: Build plugins with Gradle
-        run: ./gradlew buildPlugin
+      - name: Build Bukkit with Gradle
+        run: ./gradlew ShipsToBukkit:buildPlugin
+      - name: Build Sponge with Gradle
+        run: ./gradlew ShipsToSponge:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
           name: "Builds"
