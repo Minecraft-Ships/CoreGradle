@@ -7,9 +7,6 @@
 [submodule "ShipsForCore"]
 	path = ShipsForCore
 	url = https://github.com/Minecraft-Ships/ShipsForCore.git
-[submodule "ShipsCore"]
-	path = ShipsCore
-	url = https://github.com/Minecraft-Ships/ShipsCore.git
 [submodule "CoreToSponge"]
 	path = CoreToSponge
 	url = https://github.com/Minecraft-Ships/CoreToSponge.git
