@@ -8,7 +8,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  buildBukkit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build Sponge with Gradle
+        run: ./gradlew ShipsToSponge:buildPlugin
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Sponge"
+          path: "build"
+  buildBukkit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,9 +38,7 @@ jobs:
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
         run: ./gradlew ShipsToBukkit:buildPlugin
-      - name: Build Sponge with Gradle
-        run: ./gradlew ShipsToSponge:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Builds"
+          name: "Bukkit"
           path: "build"
