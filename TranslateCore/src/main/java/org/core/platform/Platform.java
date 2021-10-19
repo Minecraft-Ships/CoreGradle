@@ -16,6 +16,7 @@ import org.core.inventory.item.data.dye.DyeTypes;
 import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.permission.Permission;
 import org.core.platform.plugin.Plugin;
+import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.text.TextColour;
 import org.core.text.TextColours;
 import org.core.utils.Singleton;
@@ -110,7 +111,7 @@ public interface Platform {
 
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
 
-    int[] getMinecraftVersion();
+    CorePluginVersion getMinecraftVersion();
 
     @NotNull PlatformDetails getDetails();
 
@@ -118,7 +119,17 @@ public interface Platform {
 
     Set<Plugin> getPlugins();
 
-    File getPluginsFolder();
+    File getPlatformPluginsFolder();
+
+    File getPlatformConfigFolder();
+
+    default File getTranslatePluginsFolder() {
+        return new File("Translate/Plugins");
+    }
+
+    default File getTranslateConfigFolder() {
+        return new File("Translate/Config");
+    }
 
     <E extends CustomEvent> E callEvent(E event);
 

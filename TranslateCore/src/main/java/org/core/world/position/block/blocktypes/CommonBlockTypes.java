@@ -1,6 +1,7 @@
 package org.core.world.position.block.blocktypes;
 
 import org.core.TranslateCore;
+import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.world.position.block.BlockType;
 
 /**
@@ -202,9 +203,9 @@ public class CommonBlockTypes {
     public static final BlockType YELLOW_SHULKER_BOX = TranslateCore.getPlatform().getBlockType("minecraft:yellow_shulker_box").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
 
     static {
-        int[] mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
+        CorePluginVersion mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
         String grassPath;
-        if (mcVersion[0] == 1 && mcVersion[1] == 16) {
+        if (mcVersion.getMinor()==1 && mcVersion.getMinor()==16) {
             grassPath = "minecraft:grass_path";
         } else {
             grassPath = "minecraft:dirt_path";

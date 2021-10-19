@@ -1,7 +1,6 @@
 package org.core.platform.plugin;
 
 import org.core.TranslateCore;
-import org.core.command.CommandRegister;
 import org.core.config.ConfigurationFormat;
 import org.core.config.ConfigurationStream;
 import org.core.platform.plugin.details.PluginVersion;
@@ -33,7 +32,7 @@ public interface Plugin {
 
 
     default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file) {
-        InputStream stream = this.getPlatformLauncher().getClass().getClassLoader().getResourceAsStream(configName);
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream(configName);
         if (stream==null) {
             System.err.println("Request for '" + configName + "' could not be found");
             return Optional.empty();
@@ -50,7 +49,7 @@ public interface Plugin {
     }
 
     default @NotNull File getConfigFolder() {
-        return new File(TranslateCore.getPlatform().getPluginsFolder(), this.getPluginId());
+        return new File(TranslateCore.getPlatform().getTranslateConfigFolder(), this.getPluginId());
     }
 
     default @NotNull Optional<InputStream> getResource(String name) {
