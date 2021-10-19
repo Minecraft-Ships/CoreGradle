@@ -11,5 +11,5 @@
 	path = CoreToBukkit
 	url = https://github.com/Minecraft-Ships/CoreToBukkit.git
 [submodule "TranslateCore"]
-    path = TranslateCore
-    url = https://github.com/Minecraft-Ships/TranslateCore.git
+	path = TranslateCore
+	url = https://github.com/Minecraft-Ships/TranslateCore.git
