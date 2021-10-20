@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  buildSponge:
+  buildShipsSponge:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,24 @@ jobs:
         with:
           name: "Sponge"
           path: "build"
-  buildBukkit:
+  buildTranslateShips:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build Ships with translate
+        run: ./gradlew ShipsForCore:build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Ships"
+          path: "ShipsForCore/build/libs/*.jar"
+  buildTranslateBukkit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +54,7 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
-        run: ./gradlew ShipsToBukkit:buildPlugin
+        run: ./gradlew CoreToBukkit:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
           name: "Bukkit"
