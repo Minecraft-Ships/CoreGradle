@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew ShipsToSponge:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Sponge"
+          name: "Ships-Sponge-StandAlone"
           path: "build"
   buildTranslateShips:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
         run: ./gradlew ShipsForCore:build
       - uses: actions/upload-artifact@v2
         with:
-          name: "Ships"
+          name: "Ships-For-Translate-Core"
           path: "ShipsForCore/build/libs/*.jar"
   buildTranslateBukkit:
     runs-on: ubuntu-latest
@@ -57,5 +57,5 @@ jobs:
         run: ./gradlew CoreToBukkit:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Bukkit"
+          name: "Bukkit-Translate-Core"
           path: "build"
