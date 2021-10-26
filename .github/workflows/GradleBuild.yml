@@ -59,3 +59,24 @@ jobs:
         with:
           name: "Bukkit-Translate-Core"
           path: "build"
+  buildStandAloneBukkit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: '16'
+          distribution: 'adopt'
+      - name: Build Bukkit with Gradle
+        run: ./gradlew CoreToBukkit:buildPlugin
+      - name: Build Ships with Gralde
+        run: ./gradlew ShipsForCore:build
+      - name: Combine two
+        run: java -cp ./build/TranslateCoreBukkit.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-1.0-SNAPSHOT.jar main org.ships.plugin.ShipsPlugin
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Ships-Bukkit-Standalone"
+          path: *.jar
