@@ -14,16 +14,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Set up JDK 16
+      - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
-          java-version: '16'
+          java-version: '8'
           distribution: 'adopt'
       - name: Build Sponge with Gradle
         run: ./gradlew ShipsToSponge:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Ships-Sponge-StandAlone"
+          name: "Standalone-Ships-Sponge"
           path: "build"
   buildTranslateShips:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
         run: ./gradlew ShipsForCore:build
       - uses: actions/upload-artifact@v2
         with:
-          name: "Ships-For-Translate-Core"
+          name: "Ships-For-Core"
           path: "ShipsForCore/build/libs/*.jar"
   buildTranslateBukkit:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
         run: ./gradlew CoreToBukkit:buildPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Bukkit-Translate-Core"
+          name: "TranslateCore-Bukkit"
           path: "build"
   buildStandAloneBukkit:
     runs-on: ubuntu-latest
@@ -65,10 +65,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Setup JDK 16
+      - name: Setup JDK 8
         uses: actions/setup-java@v2
         with:
-          java-version: '16'
+          java-version: '8'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
         run: ./gradlew CoreToBukkit:buildPlugin
@@ -78,5 +78,5 @@ jobs:
         run: java -cp ./build/TranslateCoreBukkit.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-1.0-SNAPSHOT.jar main org.ships.plugin.ShipsPlugin
       - uses: actions/upload-artifact@v2
         with:
-          name: "Ships-Bukkit-Standalone"
+          name: "Standalone-Ships-Bukkit"
           path: "*.jar"
