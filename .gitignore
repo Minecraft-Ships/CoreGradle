@@ -1,13 +1,13 @@
-/CoreToSponge/
-/CoreToBukkit/
-/CoreToPaper/
+CoreToSponge/
+CoreToBukkit/
+CoreToPaper/
 
-/ShipsToSponge/
-/ShipsToBukkit/
+ShipsToSponge/
+ShipsToBukkit/
 
-/ShipsForCore/
-/ShipsCore/
+ShipsForCore/
+ShipsCore/
 
-/.idea/
-/.gradle/
-/build/
+.idea/
+.gradle/
+build/
