@@ -9,6 +9,7 @@ on:
 
 jobs:
   buildShipsSponge:
+    needs: [buildTranslateShips]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -60,6 +61,7 @@ jobs:
           name: "TranslateCore-Bukkit"
           path: "build"
   buildStandAloneBukkit:
+    needs: [buildTranslateBukkit, buildTranslateShips]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
