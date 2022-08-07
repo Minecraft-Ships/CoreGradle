@@ -8,6 +8,7 @@ ShipsToBukkit/
 ShipsForCore/
 ShipsCore/
 
-.idea/
+.idea/modules
+.idea/*[!/].xml
 .gradle/
 build/
