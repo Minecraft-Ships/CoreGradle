@@ -1,7 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="9fc1d26a-ba05-3f4f-9cf9-08ef70a4f9aa" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AbsoluteAlignmentInUserInterface" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AssertStatement" enabled="true" level="WEAK WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES" />
     <inspection_tool class="AssignmentToNull" enabled="true" level="WARNING" enabled_by_default="true">
@@ -73,18 +72,6 @@
     <inspection_tool class="RedundantFieldInitialization" enabled="true" level="WEAK WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES" />
     <inspection_tool class="RedundantMethodOverride" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
-      <replaceConfiguration name="Old Positions code" problemDescriptor="Positions will be removed. Used Relative to instead" text="$Instance$.getPositions()" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="$Instance$.getSyncedPositions()">
-        <constraint name="__context__" within="" contains="" />
-        <constraint name="Instance" minCount="0" within="" contains="" />
-      </replaceConfiguration>
-      <replaceConfiguration name="Old schedule builder" problemDescriptor="The old schedule builder will be removed. Use managers version now" text="org.core.TranslateCore.createSchedulerBuilder()" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="org.core.TranslateCore.getScheduleManager().schedule()">
-        <constraint name="__context__" within="" contains="" />
-      </replaceConfiguration>
-      <replaceConfiguration name="Old Schedule executor" problemDescriptor="setExecutor will be removed." text="$Instance$.setExecutor($Parameter$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="$Instance$.setRunner($Parameter$)">
-        <constraint name="__context__" within="" contains="" />
-        <constraint name="Instance" within="" contains="" />
-        <constraint name="Parameter" within="" contains="" />
-      </replaceConfiguration>
       <replaceConfiguration name="orElseThrowOptional" problemDescriptor="Line can be shortened" text="Optional&lt;$ClassType$&gt; $optionalVariable$ = $optionalValue$;&#10;if($optionalVariable$.isEmpty()){&#10;    throw $throwable$;&#10;}&#10;return $optionalVariable$.get();" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="return $optionalValue$.orElseThrow(() -&gt; $throwable$);">
         <constraint name="__context__" within="" contains="" />
         <constraint name="ClassType" within="" contains="" />
@@ -104,9 +91,9 @@
       <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
       <option name="useParameterizedTypeForCollectionMethods" value="true" />
       <option name="doNotWeakenToJavaLangObject" value="true" />
-      <option name="onlyWeakentoInterface" value="false" />
+      <option name="onlyWeakentoInterface" value="true" />
     </inspection_tool>
-    <inspection_tool class="UNCHECKED_WARNING" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="IGNORE_UNCHECKED_ASSIGNMENT" value="false" />
       <option name="IGNORE_UNCHECKED_GENERICS_ARRAY_CREATION" value="true" />
       <option name="IGNORE_UNCHECKED_CALL" value="false" />
