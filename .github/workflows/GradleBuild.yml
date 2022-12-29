@@ -60,7 +60,7 @@ jobs:
         with:
           name: "TranslateCore-Bukkit"
           path: "build"
-  buildTranslateBukkit1-19.3:
+  buildTranslateBukkit1-19-3:
     needs: [ buildTranslateBukkit ]
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +74,7 @@ jobs:
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
         run: ./gradlew CoreToBukkit:buildPlugin -P paper-api-version=1.19.3
-  buildTranslateBukkit1-17.1:
+  buildTranslateBukkit1-17-1:
     needs: [ buildTranslateBukkit ]
     runs-on: ubuntu-latest
     steps:
