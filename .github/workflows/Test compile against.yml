@@ -8,7 +8,7 @@
 name: Java CI with Gradle
 
 on:
-  workflow-dispatch:
+  workflow_dispatch:
     inputs:
       version: 
         type: string
