@@ -60,7 +60,8 @@ jobs:
         with:
           name: "TranslateCore-Bukkit"
           path: "build"
-buildTranslateBukkitNewer:
+  buildTranslateBukkitNewer:
+    needs: [ buildTranslateBukkit ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
