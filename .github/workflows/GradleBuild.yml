@@ -116,7 +116,7 @@ jobs:
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
         run: ./gradlew CoreToBukkit:buildPlugin
-      - name: Build Ships with Gralde
+      - name: Build Ships with Gradle
         run: ./gradlew ShipsForCore:build
       - name: Combine two
         run: java -cp ./build/TranslateCoreBukkit.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-6.0.0.0-Beta.jar main org.ships.plugin.ShipsPlugin
