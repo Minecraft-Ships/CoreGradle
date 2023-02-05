@@ -88,7 +88,7 @@ jobs:
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
         run: ./gradlew CoreToBukkit:buildPlugin -P paper-api-version=1.19.3
-  buildTranslateBukkit1-17-1:
+  buildTranslateBukkit1-18-2:
     needs: [ buildTranslateBukkit ]
     runs-on: ubuntu-latest
     steps:
@@ -101,7 +101,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
-        run: ./gradlew CoreToBukkit:buildPlugin -P paper-api-version=1.17.1
+        run: ./gradlew CoreToBukkit:buildPlugin -P paper-api-version=1.18.2
   buildStandAloneBukkit:
     needs: [ buildTranslateBukkit, buildTranslateShips ]
     runs-on: ubuntu-latest
