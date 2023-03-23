@@ -10,5 +10,7 @@ ShipsCore/
 
 .idea/modules
 .idea/*[!/].xml
+.idea/artifacts/*
 .gradle/
 build/
+translate-core.properties
