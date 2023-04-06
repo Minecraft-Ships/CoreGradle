@@ -74,6 +74,23 @@ jobs:
         with:
           name: "TranslateCore-Bukkit"
           path: "build"
+  buildTranslateFolia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Build Folia with Gradle
+        run: ./gradlew CoreToFolia:buildPlugin
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "TranslateCore-Folia"
+          path: "build"
   buildTranslateBukkit1-19-3:
     needs: [ buildTranslateBukkit ]
     runs-on: ubuntu-latest
@@ -123,4 +140,26 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: "Standalone-Ships-Bukkit"
+          path: "*.jar"
+  buildStandAloneFolia:
+    needs: [ buildTranslateFolia, buildTranslateShips ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Setup JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Build Folia with Gradle
+        run: ./gradlew CoreToFolia:buildPlugin
+      - name: Build Ships with Gradle
+        run: ./gradlew ShipsForCore:build
+      - name: Combine two
+        run: java -cp ./build/TranslateCoreFolia.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-6.0.0.0-Beta.jar main org.ships.plugin.ShipsPlugin
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Standalone-Ships-Folia"
           path: "*.jar"
