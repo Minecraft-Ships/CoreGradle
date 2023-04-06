@@ -14,5 +14,5 @@
 	path = TranslateCore
 	url = https://github.com/Minecraft-Ships/TranslateCore.git
 [submodule "CoreToFolia"]
-    path = CoreToFolia
-    url = https://github.com/Minecraft-Ships/CoreToFolia.git
+	path = CoreToFolia
+	url = https://github.com/Minecraft-Ships/CoreToFolia.git
