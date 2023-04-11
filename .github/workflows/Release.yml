@@ -37,7 +37,7 @@ jobs:
     - name: Combine two
       run: java -cp ./build/TranslateCoreFolia.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-6.0.0.0-Beta.jar main org.ships.plugin.ShipsPlugin
     - name: Rename
-      run: rename "Standalone - ShipsForCore-6.0.0.0-Beta.jar" "ShipsFolia.jar"
+      run: mv "Standalone - ShipsForCore-6.0.0.0-Beta.jar" "ShipsFolia.jar"
     - name: Temp upload
       uses: actions/upload-artifact@v3
       with:
