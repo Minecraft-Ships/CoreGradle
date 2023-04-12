@@ -120,7 +120,7 @@ jobs:
       - name: Build Bukkit with Gradle
         run: ./gradlew CoreToBukkit:plugin -P paper-api-version=1.18.2
   buildStandAloneBukkit:
-    needs: [ buildTranslateBukkit, buildTranslateShips ]
+    needs: [ buildTranslateBukkit, testShips ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -138,7 +138,7 @@ jobs:
           name: "Standalone-Ships-Bukkit"
           path: "standalone/ShipsBukkit.jar"
   buildStandAloneFolia:
-    needs: [ buildTranslateFolia, buildTranslateShips ]
+    needs: [ buildTranslateFolia, testShips ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
