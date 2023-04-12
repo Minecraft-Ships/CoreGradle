@@ -31,15 +31,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build CoreToFolia
-      run: ./gradlew CoreToFolia:buildPlugin
-    - name: Build ShipsForCore
-      run: ./gradlew ShipsForCore:build
-    - name: Combine two
-      run: java -cp ./build/TranslateCoreFolia.jar org.core.terminal.Terminal jar ShipsForCore/build/libs/ShipsForCore-6.0.0.0-Beta.jar main org.ships.plugin.ShipsPlugin
-    - name: Rename
-      run: mv "Standalone - ShipsForCore-6.0.0.0-Beta.jar" "ShipsFolia.jar"
+      run: ./gradlew buildFolia
     - name: Temp upload
       uses: actions/upload-artifact@v3
       with:
         name: "Temp-Folia"
-        path: "ShipsFolia.jar"
+        path: "standalone/ShipsFolia.jar"

@@ -1,0 +1,68 @@
+plugins {
+    id 'java-library'
+}
+
+group 'org.ships'
+version '6.0.0.0'
+description 'Full'
+java.sourceCompatibility = JavaVersion.VERSION_17
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.register('buildFolia', Jar) {
+    def path = project.rootDir.path + "/standalone/"
+    file(path).mkdirs()
+    archiveClassifier = 'uber'
+    archiveFileName = 'ShipsFolia.jar'
+    destinationDirectory = file(path)
+
+    dependsOn ':ShipsForCore:standaloneFolia'
+    dependsOn ':CoreToFolia:plugin'
+    dependsOn configurations.runtimeClasspath
+
+    def type = 'Folia'
+
+    def translateCoreFile = files(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCore' + type + '.jar')
+    from {
+        translateCoreFile
+        configurations.runtimeClasspath.findAll {
+            it.name.endsWith('jar') && !it.name.contains("junit") && !it.name.contains("hamcrest")
+        }.collect {
+            zipTree(it).matching {
+                exclude "*.txt"
+            }
+        }
+    }
+}
+
+tasks.register('buildBukkit', Jar) {
+    def path = project.rootDir.path + "/standalone/"
+    file(path).mkdirs()
+    it.archiveClassifier = 'uber'
+    it.archiveFileName = 'ShipsBukkit.jar'
+    destinationDirectory = file(path)
+
+    dependsOn ':ShipsForCore:standaloneBukkit'
+    dependsOn ':CoreToBukkit:plugin'
+    dependsOn configurations.runtimeClasspath
+
+    def type = 'Bukkit'
+
+    def translateCoreFile = files(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCore' + type + '.jar')
+    from {
+        translateCoreFile
+        configurations.runtimeClasspath.findAll {
+            it.name.endsWith('jar') && !it.name.contains("junit") && !it.name.contains("hamcrest")
+        }.collect {
+            zipTree(it).matching {
+                exclude "*.txt"
+            }
+        }
+    }
+}
+
+dependencies {
+    api files(project.projectDir.path + '/ShipsForCore/build/libs/ShipsForCore-' + project.version + "-Beta.jar")
+}
