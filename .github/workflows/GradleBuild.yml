@@ -47,7 +47,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: "Standalone-Ships-Sponge"
-          path: "build"
+          path: "ShipsToSponge/build/build/ShipsSponge.jar"
   buildTranslateBukkit:
     runs-on: ubuntu-latest
     steps:
