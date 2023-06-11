@@ -34,4 +34,4 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build with Gradle
-      run: ./gradlew CoreToBukkit:buildPlugin -P paper-api-version=${{ github.event.inputs.version }}
+      run: ./gradlew CoreToBukkit:plugin -P paper-api-version=${{ github.event.inputs.version }}
