@@ -1,7 +1,6 @@
 rootProject.name = 'Ships'
 include 'ShipsForCore'
 include 'TranslateCore'
-include 'CoreToBukkit'
 include 'CoreToSponge'
 include 'ShipsToSponge'
 include 'CoreToFolia'
