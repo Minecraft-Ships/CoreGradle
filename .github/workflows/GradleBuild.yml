@@ -48,23 +48,6 @@ jobs:
         with:
           name: "Standalone-Ships-Sponge"
           path: "ShipsToSponge/build/build/ShipsSponge.jar"
-  buildTranslateBukkit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - name: Set up JDK 16
-        uses: actions/setup-java@v3
-        with:
-          java-version: '16'
-          distribution: 'adopt'
-      - name: Build Bukkit with Gradle
-        run: ./gradlew CoreToBukkit:plugin
-      - uses: actions/upload-artifact@v3
-        with:
-          name: "TranslateCore-Bukkit"
-          path: "CoreToBukkit/build/libs/TranslateCoreBukkit.jar"
   buildTranslateFolia:
     runs-on: ubuntu-latest
     steps:
@@ -82,8 +65,8 @@ jobs:
         with:
           name: "TranslateCore-Folia"
           path: "CoreToFolia/build/libs/TranslateCoreFolia.jar"
-  buildTranslateBukkit1-19-4:
-    needs: [ buildTranslateBukkit ]
+  buildTranslateFolia1-19-4:
+    needs: [ buildTranslateFolia ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -95,9 +78,9 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
-        run: ./gradlew CoreToBukkit:plugin -P paper-api-version=1.19.4
+        run: ./gradlew CoreToFolia:plugin -P folia-api-version=1.19.4 -P use-paper=true
   buildTranslateBukkit1-18-2:
-    needs: [ buildTranslateBukkit ]
+    needs: [ buildTranslateFolia ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -109,25 +92,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
-        run: ./gradlew CoreToBukkit:plugin -P paper-api-version=1.18.2
-  buildStandAloneBukkit:
-    needs: [ buildTranslateBukkit, testShips ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - name: Setup JDK 16
-        uses: actions/setup-java@v3
-        with:
-          java-version: '16'
-          distribution: 'adopt'
-      - name: Build Bukkit with Gradle
-        run: ./gradlew buildBukkit
-      - uses: actions/upload-artifact@v3
-        with:
-          name: "Standalone-Ships-Bukkit"
-          path: "standalone/ShipsBukkit.jar"
+        run: ./gradlew CoreToFolia:plugin -P folia-api-version=1.18.2 -P use-paper=true
   buildStandAloneFolia:
     needs: [ buildTranslateFolia, testShips ]
     runs-on: ubuntu-latest
