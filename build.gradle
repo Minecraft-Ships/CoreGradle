@@ -12,43 +12,19 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.register('buildFolia', Jar) {
-    def path = project.rootDir.path + "/standalone/"
-    file(path).mkdirs()
-    archiveClassifier = 'uber'
-    archiveFileName = 'ShipsFolia.jar'
-    destinationDirectory = file(path)
-
     dependsOn ':ShipsForCore:standaloneFolia'
     dependsOn ':CoreToFolia:plugin'
     dependsOn configurations.runtimeClasspath
 
-    def type = 'Folia'
+    archiveClassifier = 'uber'
+    archiveFileName = 'ShipsFolia.jar'
 
-    def translateCoreFile = files(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCore' + type + '.jar')
-    from {
-        translateCoreFile
-        configurations.runtimeClasspath.findAll {
-            it.name.endsWith('jar') && !it.name.contains("junit") && !it.name.contains("hamcrest")
-        }.collect {
-            zipTree(it).matching {
-                exclude "*.txt"
-            }
-        }
-    }
-}
 
-tasks.register('buildBukkit', Jar) {
     def path = project.rootDir.path + "/standalone/"
     file(path).mkdirs()
-    it.archiveClassifier = 'uber'
-    it.archiveFileName = 'ShipsBukkit.jar'
     destinationDirectory = file(path)
 
-    dependsOn ':ShipsForCore:standaloneBukkit'
-    dependsOn ':CoreToBukkit:plugin'
-    dependsOn configurations.runtimeClasspath
-
-    def type = 'Bukkit'
+    def type = 'Folia'
 
     def jarFiles = configurations.runtimeClasspath.findAll {
         it.name.endsWith('jar') && !it.name.contains("junit") && !it.name.contains("hamcrest")
@@ -58,12 +34,13 @@ tasks.register('buildBukkit', Jar) {
         }
     }
 
-    File translateCoreFile = file(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCore' + type + '.jar')
+    File translateCoreFile = file(project.projectDir.path + '/CoreTo' + type + '/build/libs').listFiles()[0]
     def coreFiles = zipTree(translateCoreFile)
     jarFiles.add(coreFiles)
     from {
         jarFiles
     }
+
 }
 
 dependencies {
