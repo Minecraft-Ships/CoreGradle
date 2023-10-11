@@ -20,6 +20,7 @@ tasks.register('buildFolia', Jar) {
     archiveFileName = 'ShipsFolia.jar'
 
 
+
     def path = project.rootDir.path + "/standalone/"
     file(path).mkdirs()
     destinationDirectory = file(path)
@@ -34,11 +35,13 @@ tasks.register('buildFolia', Jar) {
         }
     }
 
-    File translateCoreFile = file(project.projectDir.path + '/CoreTo' + type + '/build/libs').listFiles()[0]
-    def coreFiles = zipTree(translateCoreFile)
-    jarFiles.add(coreFiles)
-    from {
-        jarFiles
+    File translateCoreFile = file(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCoreFolia')
+    if(translateCoreFile.exists()) {
+        def coreFiles = zipTree(translateCoreFile)
+        jarFiles.add(coreFiles)
+        from {
+            jarFiles
+        }
     }
 
 }
