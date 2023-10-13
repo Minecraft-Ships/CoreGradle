@@ -63,7 +63,7 @@ jobs:
         run: ./gradlew buildPaper
       - uses: actions/upload-artifact@v3
         with:
-          name: "TranslateCore-Folia/Paper"
+          name: "TranslateCore-Folia-And-Paper"
           path: "standalone/ShipsFolia.jar"
   buildTranslateFolia1-19-4:
     needs: [ buildTranslateFolia ]
@@ -95,5 +95,5 @@ jobs:
         run: ./gradlew buildFolia
       - uses: actions/upload-artifact@v3
         with:
-          name: "Standalone-Ships-Folia/Paper"
+          name: "Standalone-Ships-Folia-And-Paper"
           path: "standalone/ShipsFolia.jar"
