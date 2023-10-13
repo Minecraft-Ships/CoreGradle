@@ -5,43 +5,13 @@ plugins {
 group 'org.ships'
 version '6.0.0.0'
 description 'Full'
+
+apply from: 'buildGradle/build.gradle'
+
 java.sourceCompatibility = JavaVersion.VERSION_17
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-tasks.register('buildFolia', Jar) {
-    dependsOn ':ShipsForCore:standaloneFolia'
-    dependsOn ':CoreToFolia:plugin'
-    dependsOn configurations.runtimeClasspath
-
-    archiveClassifier = 'uber'
-    archiveFileName = 'ShipsFolia.jar'
-
-
-    def path = project.rootDir.path + "/standalone/"
-    file(path).mkdirs()
-    destinationDirectory = file(path)
-
-    def type = 'Folia'
-
-    def jarFiles = configurations.runtimeClasspath.findAll {
-        it.name.endsWith('jar') && !it.name.contains("junit") && !it.name.contains("hamcrest")
-    }.collect {
-        zipTree(it).matching {
-            exclude "*.txt"
-        }
-    }
-
-    File translateCoreFile = file(project.projectDir.path + '/CoreTo' + type + '/build/libs/TranslateCoreFolia.jar')
-    def coreFiles = zipTree(translateCoreFile)
-    jarFiles.add(coreFiles)
-    from {
-        jarFiles
-    }
-
-
 }
 
 dependencies {

@@ -1,0 +1,76 @@
+import java.nio.charset.Charset
+import java.nio.file.Files
+import java.util.function.Consumer
+import java.util.jar.JarFile
+import java.util.stream.Collectors
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+
+tasks.register("buildSponge") {
+    dependsOn("TranslateCore:build")
+    dependsOn("CoreToSponge:build")
+    dependsOn("ShipsForCore:build")
+    doLast {
+        combine("CoreToSponge", (ZipOutputStream zos) -> {
+            var json = Files.lines(file("buildGradle/sponge_plugins.json").toPath()).collect(Collectors.joining("\n")).replaceAll("%version%", version)
+            zos.putNextEntry(new ZipEntry("META-INF/sponge_plugins.json"))
+            zos.write(json.getBytes(Charset.forName("UTF-8")))
+        })
+    }
+
+}
+
+tasks.register("buildPaper") {
+    dependsOn("TranslateCore:build")
+    dependsOn("CoreToFolia:build")
+    dependsOn("ShipsForCore:build")
+    doLast {
+        combine("CoreToFolia", (zos) -> { })
+    }
+}
+
+ext.combine = { path, adder ->
+    var shipsForCoreJar = file('ShipsForCore/build/libs/').listFiles()[0]
+    var translateCoreJar = file('TranslateCore/build/libs/').listFiles()[0]
+    var implementationCoreJar = file(path + "/build/libs/").listFiles()[0]
+    var name = path.substring("CoreTo".length())
+
+    var output = file('standalone/Ships' + name + ".jar")
+
+    output.parentFile.mkdirs()
+    output.createNewFile();
+
+    var entered = new HashSet<>();
+    ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(output));
+
+    var files = new File[]{shipsForCoreJar, translateCoreJar, implementationCoreJar}
+    for (File file : files) {
+        JarFile jar = new JarFile(file);
+        jar.stream().forEach(entry -> {
+            if (entered.contains(entry.getName())) {
+                if (!entry.isDirectory()) {
+                    System.out.println("Duplicate found: " + entry.getName())
+                }
+                return
+            }
+            entered.add(entry.getName())
+            var newEntry = new ZipEntry(entry.getName());
+            zos.putNextEntry(newEntry);
+            var is = jar.getInputStream(entry);
+            is.transferTo(zos);
+            zos.flush()
+            is.close()
+        })
+        jar.close()
+    }
+
+    var translateEntry = new ZipEntry("META-INF/translate-core.properties")
+    zos.putNextEntry(translateEntry);
+    zos.write("stand-alone=org.ships.plugin.ShipsPlugin".getBytes(Charset.forName("UTF-8")))
+
+    ((Consumer<ZipOutputStream>) adder).accept(zos);
+
+    zos.finish()
+    zos.close();
+
+}
