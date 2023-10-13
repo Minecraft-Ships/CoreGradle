@@ -31,7 +31,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build CoreToFolia
-      run: ./gradlew buildFolia
+      run: ./gradlew buildPaper
     - name: Temp upload
       uses: actions/upload-artifact@v3
       with:
