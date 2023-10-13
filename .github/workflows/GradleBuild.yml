@@ -43,11 +43,11 @@ jobs:
           java-version: '16'
           distribution: 'adopt'
       - name: Build Sponge with Gradle
-        run: ./gradlew ShipsToSponge:plugin
+        run: ./gradlew buildSponge
       - uses: actions/upload-artifact@v3
         with:
           name: "Standalone-Ships-Sponge"
-          path: "ShipsToSponge/build/build/ShipsSponge.jar"
+          path: "standalone/ShipsSponge.jar"
   buildTranslateFolia:
     runs-on: ubuntu-latest
     steps:
@@ -60,11 +60,11 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Folia with Gradle
-        run: ./gradlew CoreToFolia:plugin
+        run: ./gradlew buildPaper
       - uses: actions/upload-artifact@v3
         with:
-          name: "TranslateCore-Folia"
-          path: "CoreToFolia/build/libs/TranslateCoreFolia.jar"
+          name: "TranslateCore-Folia/Paper"
+          path: "standalone/ShipsFolia.jar"
   buildTranslateFolia1-19-4:
     needs: [ buildTranslateFolia ]
     runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Bukkit with Gradle
-        run: ./gradlew CoreToFolia:plugin -P folia-api-version=1.19.4 -P use-paper=true
+        run: ./gradlew buildPaper -P folia-api-version=1.19.4 -P use-paper=true
   buildStandAloneFolia:
     needs: [ buildTranslateFolia, testShips ]
     runs-on: ubuntu-latest
@@ -95,5 +95,5 @@ jobs:
         run: ./gradlew buildFolia
       - uses: actions/upload-artifact@v3
         with:
-          name: "Standalone-Ships-Folia"
+          name: "Standalone-Ships-Folia/Paper"
           path: "standalone/ShipsFolia.jar"
