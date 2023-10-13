@@ -92,7 +92,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build Folia with Gradle
-        run: ./gradlew buildFolia
+        run: ./gradlew buildPaper
       - uses: actions/upload-artifact@v3
         with:
           name: "Standalone-Ships-Folia-And-Paper"
