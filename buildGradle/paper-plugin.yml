@@ -1,0 +1,11 @@
+name: 'Ships'
+version: '%version%'
+api-version: '1.19'
+main: 'org.core.implementation.folia.platform.plugin.boot.TranslateCoreBoot'
+authors:
+  - mosemister
+dependencies:
+  server:
+    vault:
+      load: AFTER
+      required: false

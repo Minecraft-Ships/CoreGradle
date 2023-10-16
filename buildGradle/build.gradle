@@ -25,7 +25,11 @@ tasks.register("buildPaper") {
     dependsOn("CoreToFolia:build")
     dependsOn("ShipsForCore:build")
     doLast {
-        combine("CoreToFolia", (zos) -> { })
+        combine("CoreToFolia", (zos) -> {
+            var yaml = Files.lines(file("buildGradle/paper-plugin.yml").toPath()).collect(Collectors.joining("\n")).replaceAll("%version%", version)
+            zos.putNextEntry(new ZipEntry("paper-plugin.yml"))
+            zos.write(yaml.getBytes(Charset.forName("UTF-8")))
+        })
     }
 }
 
@@ -36,6 +40,9 @@ ext.combine = { path, adder ->
     var name = path.substring("CoreTo".length())
 
     var output = file('standalone/Ships' + name + ".jar")
+    if (output.exists()) {
+        output.delete();
+    }
 
     output.parentFile.mkdirs()
     output.createNewFile();
@@ -51,6 +58,16 @@ ext.combine = { path, adder ->
                 if (!entry.isDirectory()) {
                     System.out.println("Duplicate found: " + entry.getName())
                 }
+                return
+            }
+            if (entry.getName().equals("META-INF/translate-core.properties")) {
+                System.err.println("Found translate-core entry in module of " + file.path)
+                return;
+            }
+            if (entry.getName().equals("paper-plugin.yml")) {
+                return
+            }
+            if (entry.getName().equals("META-INF/sponge_plugins.json")) {
                 return
             }
             entered.add(entry.getName())
