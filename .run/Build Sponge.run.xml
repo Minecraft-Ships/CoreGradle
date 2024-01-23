@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="CoreToSponge:plugin" />
+          <option value="buildSponge" />
         </list>
       </option>
       <option name="vmOptions" value="" />
