@@ -1,3 +1,5 @@
+import java.util.regex.Pattern
+
 plugins {
     id 'java-library'
 }
@@ -8,7 +10,8 @@ description 'Full'
 
 apply from: 'buildGradle/build.gradle'
 
-java.sourceCompatibility = JavaVersion.VERSION_17
+var targetJavaVersion = isGreater(20, 5) ? 21 : 17
+java.sourceCompatibility = JavaLanguageVersion.of(targetJavaVersion)
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -16,4 +19,14 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     api files(project.projectDir.path + '/ShipsForCore/build/libs/ShipsForCore-' + project.version + "-Beta.jar")
+}
+
+boolean isGreater(int major, int minor) {
+    var targetMinecraftVersion = project.hasProperty("folia-api-version") ? (String) project.property("folia-api-version") : "1.20.1"
+    var targetMajorVersion = Integer.parseInt(targetMinecraftVersion.split(Pattern.quote('.'))[1])
+    var targetMinorVersion = Integer.parseInt(targetMinecraftVersion.split(Pattern.quote('.'))[2])
+    if (targetMajorVersion < major) {
+        return true;
+    }
+    return targetMajorVersion == major && targetMinorVersion <= minor;
 }
