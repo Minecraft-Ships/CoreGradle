@@ -33,6 +33,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Gradle Wrapper permissions
-        run: ./chmod -x ./gradlew
+        run: chmod -x ./gradlew
       - name: Build with Gradle
         run: ./gradlew CoreToBukkit:plugin -P paper-api-version=${{ github.event.inputs.version }}
