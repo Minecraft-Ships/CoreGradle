@@ -10,8 +10,7 @@ description 'Full'
 
 apply from: 'buildGradle/build.gradle'
 
-var targetJavaVersion = isGreater(20, 5) ? 21 : 17
-java.sourceCompatibility = JavaLanguageVersion.of(targetJavaVersion)
+java.sourceCompatibility = JavaLanguageVersion.of(Integer.parseInt(project.property("JAVA_VERSION")))
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -21,7 +20,7 @@ dependencies {
     api files(project.projectDir.path + '/ShipsForCore/build/libs/ShipsForCore-' + project.version + "-Beta.jar")
 }
 
-boolean isGreater(int major, int minor) {
+/*boolean isGreater(int major, int minor) {
     var targetMinecraftVersion = project.hasProperty("folia-api-version") ? (String) project.property("folia-api-version") : "1.20.1"
     var targetMajorVersion = Integer.parseInt(targetMinecraftVersion.split(Pattern.quote('.'))[1])
     var targetMinorVersion = Integer.parseInt(targetMinecraftVersion.split(Pattern.quote('.'))[2])
@@ -29,4 +28,4 @@ boolean isGreater(int major, int minor) {
         return true;
     }
     return targetMajorVersion == major && targetMinorVersion <= minor;
-}
+}*/
